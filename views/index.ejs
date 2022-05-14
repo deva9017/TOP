@@ -14,7 +14,6 @@
     <header>
         <a href="#" class="logo"><img src="./img/logo2.png" alt=""></a>
         <div class="bx bx-menu" id="menu-icon"></div>
-
         <ul class="navbar">
             <li><a href="#home">Home</a></li>
             <li><a href="#ride">Ride</a></li>
@@ -49,23 +48,7 @@
         <% } %>
 
         <% if(user) {%>
-            <div class="form-container">
-                <form action="">
-                    <div class="input-box">
-                        <span>Location</span>
-                        <input type="search" name="" id="" placeholder="Search Places">
-                    </div>
-                    <div class="input-box">
-                        <span>Pick-Up Date</span>
-                        <input type="date" name="" id="">
-                    </div>
-                    <div class="input-box">
-                        <span>Return Date</span>
-                        <input type="date" name="" id="">
-                    </div>
-                    <input type="submit" name="" id="" class="btn">
-                </form>
-            </div>
+            <%- include('search'); -%>
         <% } %>
     </section>
 
