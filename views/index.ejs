@@ -23,10 +23,14 @@
             <li><a href="#reviews">Reviews</a></li>
         </ul>
 
+        <% if(!user){ %>
         <div class="header-btn">
-            <a href="sign-up.html" class="sign-up">Sign Up</a>
-            <a href="sign-in.html" class="sign-in">Sign In</a>
+            <a href="/register" class="sign-up">Sign Up</a>
+            <a href="/login" class="sign-in">Sign In</a>
         </div>
+        <% } else { %>
+            <p>Hello <%= userName %></p>
+        <% } %>
     </header>
 
     <!-- Home -->
@@ -40,25 +44,29 @@
             <img src="./img/taxi.png" alt="">
         </div>
 
-        <a class="" href="sign-up.html">Rent Now</a>
+        <% if(!user){ %>
+            <a class="text" href="/register">Rent Now</a>
+        <% } %>
 
-        <!-- <div class="form-container">
-            <form action="">
-                <div class="input-box">
-                    <span>Location</span>
-                    <input type="search" name="" id="" placeholder="Search Places">
-                </div>
-                <div class="input-box">
-                    <span>Pick-Up Date</span>
-                    <input type="date" name="" id="">
-                </div>
-                <div class="input-box">
-                    <span>Return Date</span>
-                    <input type="date" name="" id="">
-                </div>
-                <input type="submit" name="" id="" class="btn">
-            </form>
-        </div> -->
+        <% if(user) {%>
+            <div class="form-container">
+                <form action="">
+                    <div class="input-box">
+                        <span>Location</span>
+                        <input type="search" name="" id="" placeholder="Search Places">
+                    </div>
+                    <div class="input-box">
+                        <span>Pick-Up Date</span>
+                        <input type="date" name="" id="">
+                    </div>
+                    <div class="input-box">
+                        <span>Return Date</span>
+                        <input type="date" name="" id="">
+                    </div>
+                    <input type="submit" name="" id="" class="btn">
+                </form>
+            </div>
+        <% } %>
     </section>
 
     <!-- Ride -->

@@ -6,6 +6,8 @@ mongoose.connect("mongodb://localhost:27017/topDB");
 
 const app = express();
 
+app.set("view engine", "ejs");
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -14,17 +16,17 @@ const detailsSchema = new mongoose.Schema({
   last_name: String,
   email: String,
   password: String,
-  dlNumber: String,
+  dlNumber: String
 });
 
 const Person = mongoose.model("Person", detailsSchema);
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+    res.render("index", {user: 0, userName: ""});
 });
 
 app.get("/register", function (req, res) {
-  res.sendFile(__dirname + "/public/sign-up.html");
+  res.render("sign-up");
 });
 
 app.post("/register", (req, res) => {
@@ -33,7 +35,7 @@ app.post("/register", (req, res) => {
     last_name: req.body.lName,
     email: req.body.email,
     password: req.body.password,
-    dlNumber: req.body.identity,
+    dlNumber: req.body.identity
   };
 
   Person.exists(
@@ -55,18 +57,18 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(__dirname + "/public/sign-in.html");
+  res.render("sign-in");
 });
 
 app.post("/login", (req, res) => {
-  Person.exists(
+  Person.find(
     { email: req.body.email, password: req.body.password },
     function (err, doc) {
       if (err) console.log(err);
       else {
-        if (doc) {
+        if (doc.length) {
           console.log("Successfully logged in.");
-          res.redirect("/");
+          res.render("index", {user: 1, userName: doc[0].first_name+" "+doc[0].last_name});
         } else {
           console.log("Not Registered!");
           res.redirect("/register");
@@ -76,6 +78,6 @@ app.post("/login", (req, res) => {
   );
 });
 
-app.listen(4000, function () {
+app.listen(process.env.PORT || 4000, function () {
   console.log("Server is up and running at 4000");
 });
