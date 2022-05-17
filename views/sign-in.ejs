@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome 5 CDN link to add icones -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <title>Sign In</title>
-    <!-- Linking .css file with HTML page -->
-    <link rel="stylesheet" href="css/style1.css">
-</head>
-<body>
-    <div>
-        <!-- Left section of signup form -->
-        <div>
-            <h1>Log In</h1>
-            <h5>Welcome to our - favourite music</h5>
-            <form action="/login" method="post">
-             <div>
-                <p><label for="email">Email Address</label></p>
-                <input type="email" id="email" name="email" required autocomplete="off">
-             </div>
-             <div>
-                <p><label for="password">Password</label></p>
-                <input type="password" id="password" name="password" required >
-             </div>
-             <button type="submit" id="btn">Log In</button>
-             <p>Not Registered? <a href="/register">Sign Up</a></p>
-            </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/signin.css" />
+    <link rel="stylesheet" href="css/popupS.css">
+  </head>
+  <body>
+    <div class="dialogbox" id="id01">
+      <h2>Please Login To Continue</h2>
+      <form class="dialogbox-form" action="/login" method="post">
+        <div class="input-box">
+          <input type="email" name="email" id="" placeholder="Email" />
         </div>
+        <div class="input-box">
+          <input type="password" name="password" id="" placeholder="Password" />
+        </div>
+        <a href="/register">Not registered yet?</a>
+        <br><br>
+        <input type="submit" class="dialog-form-btn" />
+        <br />
+      </form>
     </div>
-</body>
+  </body>
 </html>
