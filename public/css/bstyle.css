@@ -191,7 +191,7 @@ header {
   background: black;
   color: white;
   padding: 20px;
-  border: 1px solid #f0ec00;
+  border: 1px solid yellow;
   border-radius: 15px;
 }
 .input-box {
@@ -216,7 +216,7 @@ header {
   padding: 10px 34px;
   border: none;
   border-radius: 0.5rem;
-  background: #f0ec00;
+  background: yellow;
   color: black;
   font-size: 1rem;
   font-weight: 500;

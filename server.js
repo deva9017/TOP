@@ -39,6 +39,10 @@ app.get("/", function (req, res) {
   res.render("index", { publish: 0, user: 0, userName: "" });
 });
 
+app.get("/about-us", (req, res)=>{
+  res.render("learn-more");
+})
+
 app.get("/register", function (req, res) {
   res.render("sign-up");
 });
@@ -82,6 +86,8 @@ app.get("/login", (req, res) => {
   res.render("sign-in");
 });
 
+let status = false;
+
 app.post("/login", (req, res) => {
   Person.find(
     { email: req.body.email, password: req.body.password },
@@ -90,6 +96,7 @@ app.post("/login", (req, res) => {
       else {
         if (doc.length) {
           if (doc[0].dlNumber.length) {
+            status=true;
             console.log("Successfully logged in as driver.");
             res.render("index", {
               publish: 1,
@@ -105,7 +112,7 @@ app.post("/login", (req, res) => {
             });
           }
         } else {
-          alert("Not Registered!");  // add  'try again' page
+          alert("Not Registered!"); // add  'try again' page
           console.log("Not Registered!");
           res.redirect("/register");
         }
@@ -114,37 +121,33 @@ app.post("/login", (req, res) => {
   );
 });
 
+
 app.post("/search", (req, res) => {
-  Ride.find({to: req.body.destination, date: req.body.date}, (err, doc)=>{
-    
-    if(err) console.log(err);
-
-    else{
-      if(doc.length){
-        console.log(doc);
-        res.render("searchRes");
+  Ride.find({ to: req.body.destination, date: req.body.date }, (err, doc) => {
+    if (err) console.log(err);
+    else {
+      if (doc.length) {
+        // console.log(doc);
+        res.render("searchRes", {details: doc});
       }
-
-      else
-        res.send("Sorry, currently there is no ride in this route.") // add page 
+      // else
+        // res.render("")  No results found page
     }
-
   });
-  res.redirect("/");
 });
 
 
 app.get("/publish-ride", (req, res) => {
-  res.render("rideDetails");
+  if(status)
+    res.render("rideDetails");
+  else
+    res.redirect("/");
 });
 
 app.post("/publish-ride", (req, res) => {
   Person.find({ email: req.body.driverEmail }, (err, doc) => {
-
     if (err) console.log(err);
-    
     else {
-
       let data = {
         from: req.body.from,
         to: req.body.to,
@@ -152,7 +155,7 @@ app.post("/publish-ride", (req, res) => {
         driverEmail: req.body.driverEmail,
         seats: req.body.seats,
         price: req.body.price,
-        driver: doc[0], 
+        driver: doc[0],
       };
 
       console.log(data);
@@ -160,7 +163,7 @@ app.post("/publish-ride", (req, res) => {
       let ride = new Ride(data);
       ride.save(); //add err page and back to home button
 
-      res.send("Your ride is successfully published."); 
+      res.send("Your ride is successfully published.");
     }
   });
 });

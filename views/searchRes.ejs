@@ -16,10 +16,10 @@
     <h1>Rides Details</h1>
 
   <section>
-    
     <div class="swiper mySwiper container">
       <div class="swiper-wrapper content">
-
+        
+      <% for (let i=0; i<details.length; i++){ %>
         <div class="swiper-slide card">
           <div class="card-content">
             <div class="image">
@@ -27,11 +27,11 @@
             </div>
 
             <div class="name-profession">
-              <span class="name">Someone Name</span>
-              <span class="profession">Source-Destination</span>
-              <span class="profession">Date</span>
-              <span class="profession">No. of Passengers</span>
-              <span class="profession">Price/Seat</span>
+              <span class="name"><%= details[i].driver.first_name %> <%= details[i].driver.last_name %></span>
+              <span class="profession"><%= details[i].from %> to <%= details[i].to %></span>
+              <span class="profession"><%= details[i].date %></span>
+              <span class="profession">No. of Passengers - <%= details[i].seats %></span>
+              <span class="profession">Price/Seat - ₹<%= details[i].price %></span> 
             </div>
            
             <div class="button">
@@ -40,167 +40,7 @@
             </div>
           </div>
         </div>
-        <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide card">
-            <div class="card-content">
-              <div class="image">
-                  <img src="./img/user.jpeg" alt="">
-              </div>
-  
-              <div class="name-profession">
-                <span class="name">Someone Name</span>
-                <span class="profession">Source-Destination</span>
-                <span class="profession">Date</span>
-                <span class="profession">No. of Passengers</span>
-                <span class="profession">Price/Seat</span>
-              </div>
-  
-              <div class="button">
-                <button class="aboutMe">About Me</button>
-                <button class="hireMe">Hire Me</button>
-              </div>
-            </div>
-          </div>
-
+    <% } %>
       </div>
     </div>
 
