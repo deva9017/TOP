@@ -22,10 +22,21 @@ const detailsSchema = new mongoose.Schema({
   dlNumber: String,
 });
 
+const ridesSchema = new mongoose.Schema({
+  from: String,
+  to: String,
+  date: String,
+  driverEmail: String,
+  seats: Number,
+  price: Number,
+  driver: detailsSchema,
+});
+
 const Person = mongoose.model("Person", detailsSchema);
+const Ride = mongoose.model("Ride", ridesSchema);
 
 app.get("/", function (req, res) {
-  res.render("index", { user: 0, userName: "" });
+  res.render("index", { publish: 0, user: 0, userName: "" });
 });
 
 app.get("/register", function (req, res) {
@@ -77,9 +88,8 @@ app.post("/login", (req, res) => {
     function (err, doc) {
       if (err) console.log(err);
       else {
-        console.log(doc);
         if (doc.length) {
-          if (doc[0].dlNumber) {
+          if (doc[0].dlNumber.length) {
             console.log("Successfully logged in as driver.");
             res.render("index", {
               publish: 1,
@@ -95,7 +105,7 @@ app.post("/login", (req, res) => {
             });
           }
         } else {
-          alert("Not Registered!");
+          alert("Not Registered!");  // add  'try again' page
           console.log("Not Registered!");
           res.redirect("/register");
         }
@@ -105,8 +115,54 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/search", (req, res) => {
-  console.log(req.body);
-  res.send("Thanks");
+  Ride.find({to: req.body.destination, date: req.body.date}, (err, doc)=>{
+    
+    if(err) console.log(err);
+
+    else{
+      if(doc.length){
+        console.log(doc);
+        res.render("searchRes");
+      }
+
+      else
+        res.send("Sorry, currently there is no ride in this route.") // add page 
+    }
+
+  });
+  res.redirect("/");
+});
+
+
+app.get("/publish-ride", (req, res) => {
+  res.render("rideDetails");
+});
+
+app.post("/publish-ride", (req, res) => {
+  Person.find({ email: req.body.driverEmail }, (err, doc) => {
+
+    if (err) console.log(err);
+    
+    else {
+
+      let data = {
+        from: req.body.from,
+        to: req.body.to,
+        date: req.body.date,
+        driverEmail: req.body.driverEmail,
+        seats: req.body.seats,
+        price: req.body.price,
+        driver: doc[0], 
+      };
+
+      console.log(data);
+
+      let ride = new Ride(data);
+      ride.save(); //add err page and back to home button
+
+      res.send("Your ride is successfully published."); 
+    }
+  });
 });
 
 app.listen(process.env.PORT || 4000, function () {
