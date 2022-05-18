@@ -39,9 +39,9 @@ app.get("/", function (req, res) {
   res.render("index", { publish: 0, user: 0, userName: "" });
 });
 
-app.get("/about-us", (req, res)=>{
+app.get("/about-us", (req, res) => {
   res.render("learn-more");
-})
+});
 
 app.get("/register", function (req, res) {
   res.render("sign-up");
@@ -66,16 +66,30 @@ app.post("/register", (req, res) => {
   Person.exists(
     { email: req.body.email, password: req.body.password },
     function (err, doc) {
-      if (err) console.log(err);
-      else {
+      if (err) {
+        console.log(err);
+        res.render("resStatus", { status: 1 });
+      } else {
         if (doc) {
           alert("Already registered!");
           console.log("Already registered!");
           res.redirect("/login");
         } else {
-          let person = new Person(data);
-          person.save();
-          res.redirect("/login");
+          Person.exists({ email: req.body.email }, (err, doc) => {
+            if (err) {
+              console.log(err);
+              res.render("resStatus", { status: 1 });
+            }
+
+            if (!doc) {
+              let person = new Person(data);
+              person.save();
+              res.redirect("/login");
+            } else {
+              alert("Email is already registered");
+              res.redirect("/register");
+            }
+          });
         }
       }
     }
@@ -92,11 +106,13 @@ app.post("/login", (req, res) => {
   Person.find(
     { email: req.body.email, password: req.body.password },
     function (err, doc) {
-      if (err) console.log(err);
-      else {
+      if (err) {
+        console.log(err);
+        res.render("resStatus", { status: 1 });
+      } else {
         if (doc.length) {
           if (doc[0].dlNumber.length) {
-            status=true;
+            status = true;
             console.log("Successfully logged in as driver.");
             res.render("index", {
               publish: 1,
@@ -112,42 +128,38 @@ app.post("/login", (req, res) => {
             });
           }
         } else {
-          alert("Not Registered!"); // add  'try again' page
-          console.log("Not Registered!");
-          res.redirect("/register");
+          alert("Your email or password is wrong. Try again!");
+          res.redirect("/login");
         }
       }
     }
   );
 });
 
-
 app.post("/search", (req, res) => {
   Ride.find({ to: req.body.destination, date: req.body.date }, (err, doc) => {
-    if (err) console.log(err);
-    else {
+    if (err) {
+      console.log(err);
+      res.render("resStatus", { status: 1 });
+    } else {
       if (doc.length) {
-        // console.log(doc);
-        res.render("searchRes", {details: doc});
-      }
-      // else
-        // res.render("")  No results found page
+        res.render("searchRes", { details: doc });
+      } else res.render("resStatus", { status: 2 });
     }
   });
 });
 
-
 app.get("/publish-ride", (req, res) => {
-  if(status)
-    res.render("rideDetails");
-  else
-    res.redirect("/");
+  if (status) res.render("rideDetails");
+  else res.redirect("/");
 });
 
 app.post("/publish-ride", (req, res) => {
   Person.find({ email: req.body.driverEmail }, (err, doc) => {
-    if (err) console.log(err);
-    else {
+    if (err) {
+      console.log(err);
+      res.render("resStatus", { status: 1 });
+    } else {
       let data = {
         from: req.body.from,
         to: req.body.to,
@@ -158,12 +170,9 @@ app.post("/publish-ride", (req, res) => {
         driver: doc[0],
       };
 
-      console.log(data);
-
       let ride = new Ride(data);
-      ride.save(); //add err page and back to home button
-
-      res.send("Your ride is successfully published.");
+      ride.save();
+      res.render("resStatus", { status: 0 });
     }
   });
 });

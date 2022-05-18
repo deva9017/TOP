@@ -59,11 +59,6 @@
 	float:right;
 }
 
-/*
- * Default Animation
- * very Important
- */
-
 .popupS-layer{
 	-webkit-transition: opacity .3s;
 	-o-transition: opacity .3s;
