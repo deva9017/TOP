@@ -11,8 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/sohailiqrar/TOP.git"
   },
-  "author": "Sohai Iqrar",
+  "author": "Sohail Iqrar",
   "license": "ISC",
+  "engines": {
+    "node": "16.14.2"
+  },
   "bugs": {
     "url": "https://github.com/sohailiqrar/TOP/issues"
   },

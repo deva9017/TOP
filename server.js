@@ -180,5 +180,5 @@ app.post("/publish-ride", (req, res) => {
 });
 
 app.listen(process.env.PORT || 4000, function () {
-  console.log("Server is up and running at 4000");
+  console.log("Server is up and running successfully");
 });
