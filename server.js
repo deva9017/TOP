@@ -3,7 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const alert = require("alert");
 
-mongoose.connect("mongodb://localhost:27017/topDB");
+mongoose.connect(
+  "mongodb+srv://admin-sohail:iqrarsohail@cluster0.oi89v.mongodb.net/topDB"
+);
 
 const app = express();
 
