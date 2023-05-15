@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const alert = require("alert");
 
 mongoose.connect(
-  "mongodb+srv://admin-sohail:iqrarsohail@cluster0.oi89v.mongodb.net/topDB"
+  "mongodb+srv://admin-sohail:Iqrarsohail@cluster0.oi89v.mongodb.net/topDB"
 );
 
 const app = express();
@@ -41,7 +41,7 @@ app.get("/", function (req, res) {
   res.render("index", { publish: 0, user: 0, userName: "" });
 });
 
-app.get("/about-us", (req, res) => {
+app.get("/about-us", (req, res) => {  
   res.render("learn-more");
 });
 
@@ -179,6 +179,6 @@ app.post("/publish-ride", (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 4000, function () {
+app.listen(4000, function () {
   console.log("Server is up and running successfully");
 });
